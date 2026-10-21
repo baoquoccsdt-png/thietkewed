@@ -1,399 +1,723 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VĂN BẢO HƯNG | Thiết kế Website</title>
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Bootstrap Icons -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
     <style>
-      body {
-        font-family: "Segoe UI", sans-serif;
-        background: #0f0f1a;
-        color: #fff;
-      }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0f0f1a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        .navbar {
+            background: rgba(15, 15, 26, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            background: linear-gradient(90deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-link { color: #d1d5db !important; }
+        .nav-link:hover, .nav-link.active { color: #a78bfa !important; }
 
-      /* Navbar */
-      .navbar {
-        background: rgba(15, 15, 26, 0.95) !important;
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      }
-      .navbar-brand {
-        font-weight: 700;
-        letter-spacing: 1px;
-        background: linear-gradient(90deg, #a78bfa, #60a5fa);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .nav-link {
-        color: #d1d5db !important;
-        font-weight: 500;
-        transition: 0.3s;
-      }
-      .nav-link:hover,
-      .nav-link.active {
-        color: #a78bfa !important;
-      }
+        .carousel-item {
+            height: 85vh;
+            min-height: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+        .carousel-item img {
+            height: 110%;
+            width: 110%;
+            object-fit: cover;
+            filter: brightness(0.65);
+            position: absolute;
+            top: -5%;
+            left: -5%;
+            transition: transform 0.1s ease-out;
+        }
+        .carousel-caption { bottom: 18%; z-index: 10; }
+        .carousel-caption h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+        .small-text { font-size: 0.95rem; opacity: 0.85; }
+        .btn-glow {
+            background: linear-gradient(90deg, #7c3aed, #3b82f6);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: white;
+        }
+        .btn-outline-glow {
+            border: 2px solid #a78bfa;
+            color: #a78bfa;
+            background: transparent;
+            padding: 10px 26px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
 
-      /* Carousel */
-      .carousel-item {
-        height: 85vh;
-        min-height: 500px;
-      }
-      .carousel-item img {
-        height: 100%;
-        object-fit: cover;
-        filter: brightness(0.7);
-      }
-      .carousel-caption {
-        bottom: 20%;
-      }
-      .carousel-caption h1 {
-        font-size: 3.2rem;
-        font-weight: 800;
-        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-      }
-      .carousel-caption p {
-        font-size: 1.3rem;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      }
-      .btn-glow {
-        background: linear-gradient(90deg, #7c3aed, #3b82f6);
-        border: none;
-        padding: 12px 32px;
-        border-radius: 50px;
-        font-weight: 600;
-        color: white;
-        box-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
-        transition: 0.3s;
-      }
-      .btn-glow:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 0 30px rgba(124, 58, 237, 0.8);
-        color: white;
-      }
+        .section-title {
+            font-weight: 700;
+            background: linear-gradient(90deg, #a78bfa, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-line {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #7c3aed, #3b82f6);
+            margin: 15px auto 40px;
+            border-radius: 2px;
+        }
 
-      /* Section */
-      .section-title {
-        font-weight: 700;
-        background: linear-gradient(90deg, #a78bfa, #60a5fa);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .section-line {
-        width: 80px;
-        height: 4px;
-        background: linear-gradient(90deg, #7c3aed, #3b82f6);
-        margin: 15px auto 40px;
-        border-radius: 2px;
-      }
+        .about-box, .service-card, .contact-box, .product-card, .history-card, .auth-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+        }
+        .service-card:hover, .product-card:hover, .contact-box:hover {
+            transform: translateY(-8px);
+            border-color: #7c3aed;
+        }
+        .service-icon, .contact-icon { font-size: 2.5rem; color: #a78bfa; }
+        .product-img { height: 180px; object-fit: cover; width: 100%; }
 
-      /* About */
-      .about-box {
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 20px;
-        padding: 40px;
-        backdrop-filter: blur(10px);
-      }
+        .price-old {
+            text-decoration: line-through;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+        .price-new {
+            color: #f87171;
+            font-weight: 700;
+            font-size: 1.15rem;
+        }
 
-      /* Service cards */
-      .service-card {
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 20px;
-        padding: 35px 25px;
-        transition: all 0.35s ease;
-        height: 100%;
-      }
-      .service-card:hover {
-        transform: translateY(-10px);
-        border-color: #7c3aed;
-        box-shadow: 0 15px 40px rgba(124, 58, 237, 0.25);
-      }
-      .service-icon {
-        font-size: 2.8rem;
-        background: linear-gradient(135deg, #a78bfa, #60a5fa);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 20px;
-      }
+        .auth-box { max-width: 420px; margin: 0 auto; padding: 30px; }
+        .form-control {
+            background: #0f0f1a;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+        }
+        .form-control:focus {
+            background: #0f0f1a;
+            color: white;
+            border-color: #a78bfa;
+            box-shadow: none;
+        }
 
-      /* Contact */
-      .contact-box {
-        background: rgba(255, 255, 255, 0.04);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        padding: 30px;
-        transition: 0.3s;
-      }
-      .contact-box:hover {
-        border-color: #7c3aed;
-        transform: translateY(-5px);
-      }
-      .contact-icon {
-        font-size: 2.5rem;
-        color: #a78bfa;
-      }
+        .status-doing { color: #fbbf24; }
+        .status-done { color: #22c55e; }
+        .status-cancel { color: #ef4444; }
 
-      /* Footer */
-      footer {
-        background: #0a0a12;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-      }
+        .ai-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 62px;
+            height: 62px;
+            background: linear-gradient(135deg, #7c3aed, #3b82f6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.55);
+            z-index: 9998;
+            border: none;
+        }
+        .ai-btn i { font-size: 30px; color: white; }
+
+        .chat-box {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            width: 380px;
+            max-width: 95vw;
+            height: 500px;
+            background: #16162a;
+            border: 1px solid rgba(167, 139, 250, 0.35);
+            border-radius: 20px;
+            display: none;
+            flex-direction: column;
+            z-index: 9999;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            overflow: hidden;
+        }
+        .chat-header {
+            background: linear-gradient(90deg, #7c3aed, #3b82f6);
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: #0f0f1a;
+        }
+        .msg {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 16px;
+            font-size: 0.93rem;
+            line-height: 1.5;
+            white-space: pre-line;
+        }
+        .msg.bot { background: #252540; align-self: flex-start; }
+        .msg.user { background: linear-gradient(90deg, #7c3aed, #3b82f6); align-self: flex-end; }
+        .chat-input-area {
+            display: flex;
+            gap: 8px;
+            padding: 12px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            background: #16162a;
+        }
+        .chat-input-area input {
+            flex: 1;
+            background: #0f0f1a;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 25px;
+            padding: 10px 16px;
+            color: white;
+            outline: none;
+        }
+        .chat-input-area button {
+            background: linear-gradient(135deg, #7c3aed, #3b82f6);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+        }
+        .toast-custom {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: #1a1a2e;
+            border: 1px solid #7c3aed;
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 12px;
+            z-index: 9997;
+            display: none;
+        }
+        .hidden { display: none !important; }
     </style>
-  </head>
-  <body>
-    <!-- ========== NAVBAR ========== -->
+</head>
+<body>
+
+    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-      <div class="container">
-        <a class="navbar-brand fs-4" href="#">VĂN BẢO HƯNG</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navMenu"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navMenu">
-          <ul class="navbar-nav ms-auto gap-3">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">Trang chủ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#about">Giới thiệu</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#services">Dịch vụ</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">Liên hệ</a>
-            </li>
-          </ul>
+        <div class="container">
+            <a class="navbar-brand fs-4" href="#" onclick="showPage('home')">VĂN BẢO HƯNG</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto gap-2 align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('home')">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('home'); setTimeout(()=>document.getElementById('shopping').scrollIntoView(),100)">Mua sắm</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('history')">Lịch sử mua hàng</a></li>
+                    <li class="nav-item" id="nav-login"><a class="nav-link" href="#" onclick="showPage('login')">Đăng nhập</a></li>
+                    <li class="nav-item hidden" id="nav-user">
+                        <span class="nav-link" id="username-display"></span>
+                    </li>
+                    <li class="nav-item hidden" id="nav-logout">
+                        <a class="nav-link text-danger" href="#" onclick="logout()">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
 
-    <!-- ========== CAROUSEL ========== -->
-    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button
-          type="button"
-          data-bs-target="#mainCarousel"
-          data-bs-slide-to="0"
-          class="active"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#mainCarousel"
-          data-bs-slide-to="1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#mainCarousel"
-          data-bs-slide-to="2"
-        ></button>
-      </div>
+    <!-- ==================== TRANG CHỦ ==================== -->
+    <div id="page-home">
 
-      <div class="carousel-inner">
-        <!-- Ảnh 1: Hoàng hôn / Phong cảnh đêm -->
-        <div class="carousel-item active">
-          <img
-            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&q=90"
-            class="d-block w-100"
-            alt="Hoàng hôn"
-          />
-          <div class="carousel-caption">
-            <h1>Thiết Kế Website Chuyên Nghiệp</h1>
-            <p>Biến ý tưởng của bạn thành hiện thực</p>
-            <a href="#contact" class="btn btn-glow mt-3">Liên hệ ngay</a>
-          </div>
+        <!-- CAROUSEL -->
+        <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1920&h=1080&fit=crop&q=90" class="parallax-img">
+                    <div class="carousel-caption">
+                        <h1>Thiết Kế Website Chuyên Nghiệp</h1>
+                        <p>Biến ý tưởng của bạn thành hiện thực</p>
+                        <p class="small-text">Trải nghiệm ưng mới trả tiền</p>
+                        <div class="mt-3 d-flex justify-content-center gap-3 flex-wrap">
+                            <a href="#contact" class="btn btn-glow">Liên hệ ngay</a>
+                            <a href="#shopping" class="btn btn-outline-glow">Mua sắm ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1920&h=1080&fit=crop&q=90" class="parallax-img">
+                    <div class="carousel-caption">
+                        <h1>Giao Diện Hiện Đại</h1>
+                        <p>Website đẹp – Tốc độ nhanh</p>
+                        <p class="small-text">Trải nghiệm ưng mới trả tiền</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop&q=90" class="parallax-img">
+                    <div class="carousel-caption">
+                        <h1>Công Nghệ Tiên Tiến</h1>
+                        <p>Sẵn sàng chinh phục khách hàng</p>
+                        <p class="small-text">Trải nghiệm ưng mới trả tiền</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
         </div>
 
-        <!-- Ảnh 2: Đêm thành phố / Công nghệ -->
-        <div class="carousel-item">
-          <img
-            src="https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1920&h=1080&fit=crop&q=90"
-            class="d-block w-100"
-            alt="Đêm thành phố"
-          />
-          <div class="carousel-caption">
-            <h1>Giao Diện Hiện Đại & Đẳng Cấp</h1>
-            <p>Website đẹp – Tốc độ nhanh – Trải nghiệm mượt</p>
-          </div>
-        </div>
+        <!-- GIỚI THIỆU -->
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-title display-5">Về Tôi</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="about-box text-center p-4">
+                            <h3 style="color:#a78bfa;">VĂN BẢO HƯNG</h3>
+                            <p class="lead" style="color:#d1d5db;">Tôi là người đam mê thiết kế website và công nghệ. Mang đến những trang web đẹp mắt, mượt mà và chuyên nghiệp với giá cực tốt vì mới bắt đầu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <!-- Ảnh 3: Công nghệ / Neon -->
-        <div class="carousel-item">
-          <img
-            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop&q=90"
-            class="d-block w-100"
-            alt="Công nghệ"
-          />
-          <div class="carousel-caption">
-            <h1>Công Nghệ Tiên Tiến</h1>
-            <p>Sẵn sàng chinh phục mọi khách hàng</p>
-          </div>
-        </div>
-      </div>
+        <!-- DỊCH VỤ -->
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-title display-5">Dịch Vụ</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="service-card text-center p-4">
+                            <i class="bi bi-laptop service-icon"></i>
+                            <h4>Thiết kế Website</h4>
+                            <p style="color:#9ca3af;">Giao diện hiện đại, responsive</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="service-card text-center p-4">
+                            <i class="bi bi-palette service-icon"></i>
+                            <h4>UI / UX Design</h4>
+                            <p style="color:#9ca3af;">Trải nghiệm người dùng mượt mà</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="service-card text-center p-4">
+                            <i class="bi bi-phone service-icon"></i>
+                            <h4>Landing Page</h4>
+                            <p style="color:#9ca3af;">Tối ưu chuyển đổi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#mainCarousel"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#mainCarousel"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon"></span>
-      </button>
+        <!-- MUA SẮM -->
+        <section id="shopping" class="py-5">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-title display-5">Mẫu Website Tham Khảo</h2>
+                    <div class="section-line"></div>
+                    <p class="text-secondary">Giá đang giảm mạnh vì mới mở</p>
+                </div>
+                <div class="row g-4" id="product-list"></div>
+            </div>
+        </section>
+
+        <!-- LIÊN HỆ -->
+        <section id="contact" class="py-5">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-title display-5">Liên Hệ</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-5">
+                        <div class="contact-box text-center p-4">
+                            <i class="bi bi-telephone-fill contact-icon"></i>
+                            <h4 class="mt-3">Zalo</h4>
+                            <p style="font-size:1.3rem; color:#a78bfa; font-weight:600;">0773 721 307</p>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <a href="https://www.facebook.com/profile.php?id=100084049020543" target="_blank" style="text-decoration:none; color:inherit;">
+                            <div class="contact-box text-center p-4">
+                                <i class="bi bi-facebook contact-icon"></i>
+                                <h4 class="mt-3">Facebook</h4>
+                                <p class="text-secondary">Nhấn để truy cập</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <!-- ========== GIỚI THIỆU ========== -->
-    <section id="about" class="py-5">
-      <div class="container">
-        <div class="text-center">
-          <h2 class="section-title display-5">Về Tôi</h2>
-          <div class="section-line"></div>
-        </div>
+    <!-- ==================== ĐĂNG NHẬP / ĐĂNG KÝ ==================== -->
+    <div id="page-login" class="hidden py-5">
+        <div class="container">
+            <div class="auth-box">
+                <h3 class="text-center mb-4" style="color:#a78bfa;">Đăng nhập / Đăng ký</h3>
+                
+                <ul class="nav nav-pills mb-4 justify-content-center">
+                    <li class="nav-item">
+                        <button class="nav-link active" id="tab-login" onclick="switchAuth('login')">Đăng nhập</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="tab-register" onclick="switchAuth('register')">Đăng ký</button>
+                    </li>
+                </ul>
 
-        <div class="row justify-content-center">
-          <div class="col-lg-10">
-            <div class="about-box text-center">
-              <h3 class="mb-3" style="color: #a78bfa">VĂN BẢO HƯNG</h3>
-              <p class="lead mb-4" style="color: #d1d5db; line-height: 1.8">
-                Tôi là người đam mê thiết kế website và công nghệ. Với sự sáng
-                tạo và tỉ mỉ trong từng chi tiết, tôi mang đến những trang web
-                không chỉ đẹp mắt mà còn mượt mà, hiện đại và tối ưu trải nghiệm
-                người dùng.
-              </p>
-              <p style="color: #9ca3af; line-height: 1.8">
-                Từ giao diện sang trọng đến tốc độ tải nhanh, mỗi sản phẩm tôi
-                tạo ra đều hướng đến sự chuyên nghiệp và ấn tượng. Hãy để tôi
-                giúp bạn xây dựng một website khiến khách hàng phải nhớ mãi.
-              </p>
+                <div id="form-login">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="login-user" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="login-pass" placeholder="Mật khẩu">
+                    </div>
+                    <button class="btn btn-glow w-100" onclick="doLogin()">Đăng nhập</button>
+                </div>
+
+                <div id="form-register" class="hidden">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="reg-user" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="reg-pass" placeholder="Mật khẩu">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="reg-pass2" placeholder="Nhập lại mật khẩu">
+                    </div>
+                    <button class="btn btn-glow w-100" onclick="doRegister()">Đăng ký</button>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
 
-    <!-- ========== DỊCH VỤ ========== -->
-    <section id="services" class="py-5">
-      <div class="container">
-        <div class="text-center">
-          <h2 class="section-title display-5">Dịch Vụ</h2>
-          <div class="section-line"></div>
-        </div>
-
-        <div class="row g-4">
-          <div class="col-md-4">
-            <div class="service-card text-center">
-              <i class="bi bi-laptop service-icon"></i>
-              <h4 class="mb-3">Thiết kế Website</h4>
-              <p style="color: #9ca3af">
-                Giao diện hiện đại, responsive trên mọi thiết bị, tối ưu SEO và
-                tốc độ.
-              </p>
+    <!-- ==================== LỊCH SỬ ==================== -->
+    <div id="page-history" class="hidden py-5">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="section-title display-5">Lịch sử mua hàng</h2>
+                <div class="section-line"></div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-card text-center">
-              <i class="bi bi-palette service-icon"></i>
-              <h4 class="mb-3">UI / UX Design</h4>
-              <p style="color: #9ca3af">
-                Thiết kế trải nghiệm người dùng mượt mà, đẹp mắt và dễ sử dụng.
-              </p>
+            <div id="history-list" class="row g-4"></div>
+            <div id="history-empty" class="text-center text-secondary py-5 hidden">
+                Bạn chưa order mẫu nào.
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="service-card text-center">
-              <i class="bi bi-phone service-icon"></i>
-              <h4 class="mb-3">Landing Page</h4>
-              <p style="color: #9ca3af">
-                Trang giới thiệu sản phẩm chuyên nghiệp giúp tăng tỷ lệ chuyển
-                đổi.
-              </p>
-            </div>
-          </div>
         </div>
-      </div>
-    </section>
+    </div>
 
-    <!-- ========== LIÊN HỆ ========== -->
-    <section id="contact" class="py-5">
-      <div class="container">
-        <div class="text-center">
-          <h2 class="section-title display-5">Liên Hệ</h2>
-          <div class="section-line"></div>
-        </div>
-
-        <div class="row g-4 justify-content-center">
-          <!-- Zalo -->
-          <div class="col-md-5">
-            <div class="contact-box text-center">
-              <i class="bi bi-telephone-fill contact-icon"></i>
-              <h4 class="mt-3 mb-2">Zalo</h4>
-              <p
-                class="mb-0"
-                style="font-size: 1.3rem; color: #a78bfa; font-weight: 600"
-              >
-                0773 721 307
-              </p>
-            </div>
-          </div>
-
-          <!-- Facebook -->
-          <div class="col-md-5">
-            <a
-              href="https://www.facebook.com/profile.php?id=100084049020543"
-              target="_blank"
-              style="text-decoration: none"
-            >
-              <div class="contact-box text-center">
-                <i class="bi bi-facebook contact-icon"></i>
-                <h4 class="mt-3 mb-2" style="color: #fff">Facebook</h4>
-                <p class="mb-0" style="color: #9ca3af">
-                  Nhấn để truy cập trang cá nhân
-                </p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========== FOOTER ========== -->
     <footer class="py-4 text-center">
-      <div class="container">
-        <p class="mb-1" style="color: #9ca3af">
-          © 2025 VĂN BẢO HƯNG. Thiết kế Website chuyên nghiệp.
-        </p>
-        <p class="mb-0" style="color: #6b7280; font-size: 0.9rem">
-          Made with ❤️ by Văn Bảo Hưng
-        </p>
-      </div>
+        <p class="mb-0" style="color:#9ca3af;">© 2025 VĂN BẢO HƯNG</p>
     </footer>
 
-    <!-- Bootstrap JS -->
+    <div id="toast" class="toast-custom">
+        <span id="toast-msg"></span>
+    </div>
+
+    <!-- AI Chat -->
+    <button class="ai-btn" onclick="toggleChat()">
+        <i class="bi bi-robot"></i>
+    </button>
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">
+            <span><i class="bi bi-robot me-2"></i> AI Tư vấn</span>
+            <i class="bi bi-x-lg" style="cursor:pointer" onclick="toggleChat()"></i>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="msg bot">Xin chào! Mình là AI hỗ trợ của Văn Bảo Hưng. Bạn cần tư vấn gì cứ hỏi nhé 😊</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Nhập tin nhắn..." onkeypress="if(event.key==='Enter') sendMsg()">
+            <button onclick="sendMsg()"><i class="bi bi-send-fill"></i></button>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+
+    <script>
+        // ========== DANH SÁCH MẪU + GIÁ ==========
+        const products = [
+            { id: 1, name: "Bảo hiểm Xã hội VN", desc: "Website chính phủ", img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop", link: "https://baohiemxahoi.gov.vn", old: 4500000, new: 2900000 },
+            { id: 2, name: "Shopee", desc: "Thương mại điện tử", img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop", link: "https://shopee.vn", old: 6500000, new: 4500000 },
+            { id: 3, name: "Tiki", desc: "Mua sắm online", img: "https://images.unsplash.com/photo-1556740758-90de374c12ad?w=600&h=400&fit=crop", link: "https://tiki.vn", old: 5800000, new: 3900000 },
+            { id: 4, name: "Vingroup", desc: "Tập đoàn kinh tế", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=400&fit=crop", link: "https://vingroup.net", old: 7000000, new: 4900000 },
+            { id: 5, name: "FPT", desc: "Công nghệ & Viễn thông", img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop", link: "https://fpt.com.vn", old: 5500000, new: 3600000 },
+            { id: 6, name: "VnExpress", desc: "Báo điện tử", img: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&h=400&fit=crop", link: "https://vnexpress.net", old: 4800000, new: 3200000 },
+            { id: 7, name: "The Coffee House", desc: "Thương hiệu F&B", img: "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=600&h=400&fit=crop", link: "https://thecoffeehouse.com", old: 4200000, new: 2800000 },
+            { id: 8, name: "MoMo", desc: "Ví điện tử", img: "https://images.unsplash.com/photo-1556742031-c6961e8560b0?w=600&h=400&fit=crop", link: "https://momo.vn", old: 5200000, new: 3500000 },
+            { id: 9, name: "Lazada", desc: "Sàn thương mại", img: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=600&h=400&fit=crop", link: "https://www.lazada.vn", old: 6000000, new: 4100000 },
+            { id: 10, name: "Grab", desc: "Siêu ứng dụng", img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop", link: "https://www.grab.com", old: 6800000, new: 4800000 },
+            { id: 11, name: "Vietnam Airlines", desc: "Hãng hàng không", img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=600&h=400&fit=crop", link: "https://www.vietnamairlines.com", old: 7500000, new: 5500000 },
+            { id: 12, name: "Techcombank", desc: "Ngân hàng số", img: "https://images.unsplash.com/photo-1563986768494-4dee908f2c6e?w=600&h=400&fit=crop", link: "https://techcombank.com", old: 6200000, new: 4300000 },
+            { id: 13, name: "Sendo", desc: "Mua sắm online", img: "https://images.unsplash.com/photo-1556741533-f6acd647d2fb?w=600&h=400&fit=crop", link: "https://www.sendo.vn", old: 5000000, new: 3400000 },
+            { id: 14, name: "Be Group", desc: "Ứng dụng gọi xe", img: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&h=400&fit=crop", link: "https://be.com.vn", old: 5700000, new: 3900000 },
+            { id: 15, name: "Tiki Trading", desc: "Thương mại điện tử", img: "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=600&h=400&fit=crop", link: "https://tiki.vn", old: 5400000, new: 3700000 },
+            { id: 16, name: "Viettel Money", desc: "Ví điện tử", img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&h=400&fit=crop", link: "https://viettelmoney.vn", old: 4900000, new: 3200000 }
+        ];
+
+        function formatPrice(num) {
+            return num.toLocaleString('vi-VN') + 'đ';
+        }
+
+        // ========== LOCAL STORAGE ==========
+        function getUser() { return JSON.parse(localStorage.getItem('vbh_user') || 'null'); }
+        function setUser(user) { localStorage.setItem('vbh_user', JSON.stringify(user)); updateNav(); }
+        function getOrders() { return JSON.parse(localStorage.getItem('vbh_orders') || '[]'); }
+        function saveOrders(orders) { localStorage.setItem('vbh_orders', JSON.stringify(orders)); }
+
+        function showPage(page) {
+            document.getElementById('page-home').classList.add('hidden');
+            document.getElementById('page-login').classList.add('hidden');
+            document.getElementById('page-history').classList.add('hidden');
+            document.getElementById('page-' + page).classList.remove('hidden');
+            if (page === 'history') renderHistory();
+            if (page === 'home') renderProducts();
+        }
+
+        function switchAuth(type) {
+            document.getElementById('form-login').classList.toggle('hidden', type !== 'login');
+            document.getElementById('form-register').classList.toggle('hidden', type !== 'register');
+            document.getElementById('tab-login').classList.toggle('active', type === 'login');
+            document.getElementById('tab-register').classList.toggle('active', type === 'register');
+        }
+
+        function doRegister() {
+            const user = document.getElementById('reg-user').value.trim();
+            const pass = document.getElementById('reg-pass').value;
+            const pass2 = document.getElementById('reg-pass2').value;
+            if (!user || !pass) return showToast('Vui lòng nhập đầy đủ');
+            if (pass !== pass2) return showToast('Mật khẩu không khớp');
+            let users = JSON.parse(localStorage.getItem('vbh_users') || '{}');
+            if (users[user]) return showToast('Tên đã tồn tại');
+            users[user] = pass;
+            localStorage.setItem('vbh_users', JSON.stringify(users));
+            setUser({ username: user });
+            showToast('Đăng ký thành công!');
+            showPage('home');
+        }
+
+        function doLogin() {
+            const user = document.getElementById('login-user').value.trim();
+            const pass = document.getElementById('login-pass').value;
+            let users = JSON.parse(localStorage.getItem('vbh_users') || '{}');
+            if (users[user] && users[user] === pass) {
+                setUser({ username: user });
+                showToast('Đăng nhập thành công!');
+                showPage('home');
+            } else {
+                showToast('Sai tài khoản hoặc mật khẩu');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('vbh_user');
+            updateNav();
+            showToast('Đã đăng xuất');
+            showPage('home');
+        }
+
+        function updateNav() {
+            const user = getUser();
+            if (user) {
+                document.getElementById('nav-login').classList.add('hidden');
+                document.getElementById('nav-user').classList.remove('hidden');
+                document.getElementById('nav-logout').classList.remove('hidden');
+                document.getElementById('username-display').innerText = '👤 ' + user.username;
+            } else {
+                document.getElementById('nav-login').classList.remove('hidden');
+                document.getElementById('nav-user').classList.add('hidden');
+                document.getElementById('nav-logout').classList.add('hidden');
+            }
+        }
+
+        function renderProducts() {
+            document.getElementById('product-list').innerHTML = products.map(p => `
+                <div class="col-md-6 col-lg-3">
+                    <div class="product-card">
+                        <img src="${p.img}" class="product-img">
+                        <div class="p-3">
+                            <div class="fw-bold">${p.name}</div>
+                            <div class="text-secondary small mb-1">${p.desc}</div>
+                            <div class="price-old">${formatPrice(p.old)}</div>
+                            <div class="price-new mb-2">${formatPrice(p.new)}</div>
+                            <div class="d-flex gap-2">
+                                <a href="${p.link}" target="_blank" class="btn btn-sm btn-outline-light">Xem mẫu</a>
+                                <button class="btn btn-sm btn-primary" onclick="orderProduct(${p.id})">Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function orderProduct(id) {
+            const user = getUser();
+            if (!user) {
+                showToast('Vui lòng đăng nhập để order');
+                showPage('login');
+                return;
+            }
+            const product = products.find(p => p.id === id);
+            let orders = getOrders();
+            orders.push({
+                id: Date.now(),
+                name: product.name,
+                price: product.new,
+                status: 'doing',
+                date: new Date().toLocaleString('vi-VN')
+            });
+            saveOrders(orders);
+            showToast(`Đã order "${product.name}" - ${formatPrice(product.new)}`);
+        }
+
+        function renderHistory() {
+            const user = getUser();
+            if (!user) {
+                showToast('Vui lòng đăng nhập');
+                showPage('login');
+                return;
+            }
+            const orders = getOrders();
+            const list = document.getElementById('history-list');
+            const empty = document.getElementById('history-empty');
+
+            if (orders.length === 0) {
+                list.innerHTML = '';
+                empty.classList.remove('hidden');
+                return;
+            }
+            empty.classList.add('hidden');
+
+            list.innerHTML = orders.map(o => {
+                let statusText = '', statusClass = '';
+                if (o.status === 'doing') { statusText = 'Đang làm'; statusClass = 'status-doing'; }
+                if (o.status === 'done') { statusText = 'Đã xong'; statusClass = 'status-done'; }
+                if (o.status === 'cancel') { statusText = 'Đã hủy'; statusClass = 'status-cancel'; }
+
+                return `
+                <div class="col-md-6">
+                    <div class="history-card p-4">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h5>${o.name}</h5>
+                                <div class="text-secondary small">${o.date}</div>
+                                <div class="price-new mt-1">${formatPrice(o.price)}</div>
+                                <div class="mt-2 ${statusClass} fw-bold">${statusText}</div>
+                            </div>
+                            ${o.status === 'doing' ? `<button class="btn btn-sm btn-outline-danger" onclick="cancelOrder(${o.id})">Hủy</button>` : ''}
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+
+        function cancelOrder(id) {
+            let orders = getOrders().map(o => o.id === id ? {...o, status: 'cancel'} : o);
+            saveOrders(orders);
+            renderHistory();
+            showToast('Đã hủy đơn');
+        }
+
+        function showToast(msg) {
+            document.getElementById('toast-msg').innerText = msg;
+            const t = document.getElementById('toast');
+            t.style.display = 'block';
+            setTimeout(() => t.style.display = 'none', 3000);
+        }
+
+        function toggleChat() {
+            const box = document.getElementById('chatBox');
+            box.style.display = box.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function sendMsg() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+            const body = document.getElementById('chatBody');
+            const userMsg = document.createElement('div');
+            userMsg.className = 'msg user';
+            userMsg.innerText = text;
+            body.appendChild(userMsg);
+            input.value = '';
+            body.scrollTop = body.scrollHeight;
+
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = 'msg bot';
+                botMsg.innerText = getSmartBotReply(text);
+                body.appendChild(botMsg);
+                body.scrollTop = body.scrollHeight;
+            }, 600);
+        }
+
+        function getSmartBotReply(text) {
+            const t = text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/đ/g, "d");
+            if (/(xin chao|chao|hello|hi )/.test(t)) return "Chào bạn! Mình là AI của Văn Bảo Hưng. Bạn cần tư vấn gì?";
+            if (/(gia|bao nhieu|chi phi)/.test(t)) return "Giá đang giảm mạnh vì mới mở:\nLanding page từ 2.8 triệu\nWebsite bán hàng từ 3.9 triệu\nBạn xem mẫu bên dưới nhé!";
+            if (/(oder|order|dat|khi nao|bao lau)/.test(t)) return "Sau khi order, mình liên hệ trong 1-2 giờ.\nThời gian làm: 3-7 ngày.";
+            if (/(zalo|lien he|sdt)/.test(t)) return "Zalo: 0773 721 307\nFacebook: bấm mục Liên hệ";
+            return "Bạn có thể hỏi về giá, thời gian làm, order hoặc liên hệ Zalo 0773 721 307 nhé!";
+        }
+
+        // Parallax
+        const carousel = document.getElementById('mainCarousel');
+        if (carousel) {
+            carousel.addEventListener('mousemove', e => {
+                const imgs = carousel.querySelectorAll('.carousel-item.active .parallax-img');
+                imgs.forEach(img => {
+                    const rect = carousel.getBoundingClientRect();
+                    const x = (e.clientX - rect.left - rect.width/2) / 25;
+                    const y = (e.clientY - rect.top - rect.height/2) / 25;
+                    img.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
+                });
+            });
+            carousel.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.parallax-img').forEach(img => img.style.transform = 'translate(0,0) scale(1.05)');
+            });
+        }
+
+        updateNav();
+        renderProducts();
+    </script>
+</body>
 </html>
